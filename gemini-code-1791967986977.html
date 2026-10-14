@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bưu Điện Trung Tâm Thành Phố - Di Tích Lịch Sử</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .map-box { height: 300px; width: 100%; }
+    </style>
+</head>
+<body class="bg-[#FFFBF0] text-[#1A202C] font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-[#9B2C2C] text-white shadow-md py-4 px-6">
+        <div class="max-w-4xl mx-auto flex items-center space-x-3">
+            <i class="fa-solid fa-landmark text-2xl text-[#D69E2E]"></i>
+            <h1 class="font-serif text-xl font-bold">Bưu Điện Trung Tâm Thành Phố</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-1 space-y-6 w-full">
+        <div class="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg">
+            <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent flex items-end p-6">
+                <div>
+                    <span class="px-3 py-1 bg-[#9B2C2C] text-white text-xs font-semibold rounded-full uppercase">Di tích Kiến trúc Nghệ thuật</span>
+                    <h1 class="font-serif text-2xl md:text-4xl font-bold text-white mt-2">Bưu Điện Trung Tâm TP.HCM</h1>
+                    <p class="text-gray-200 text-sm mt-1"><i class="fa-solid fa-location-dot text-[#D69E2E] mr-2"></i>2 Công xã Paris, Phường Bến Nghé, Quận 1</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Section -->
+        <div class="bg-[#9B2C2C] text-white p-5 rounded-xl shadow flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-headphones text-2xl text-[#D69E2E]"></i>
+                <div><h4 class="font-bold">Thuyết Minh Audio</h4><p class="text-xs text-red-200">Nghe hướng dẫn viên ảo giới thiệu</p></div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="speakText('Bưu điện Trung tâm Thành phố Hồ Chí Minh là công trình kiến trúc tiêu biểu kết hợp giữa phong cách phương Tây và phương Đông do kiến trúc sư Gustave Eiffel thiết kế, xây dựng từ năm 1886 đến 1891.')" class="px-4 py-2 bg-[#D69E2E] text-[#1A202C] font-bold rounded-lg text-sm hover:bg-yellow-400 transition"><i class="fa-solid fa-play mr-1"></i> Phát</button>
+                <button onclick="stopSpeech()" class="px-4 py-2 bg-white/20 rounded-lg text-sm hover:bg-white/30 transition"><i class="fa-solid fa-stop mr-1"></i> Dừng</button>
+            </div>
+        </div>
+
+        <!-- Details -->
+        <div class="bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h3 class="font-serif font-bold text-xl text-[#9B2C2C] border-b pb-2">Giới Thiệu Chi Tiết</h3>
+            <p class="text-gray-700 leading-relaxed">Bưu điện Trung tâm TP.HCM được xây dựng từ năm 1886 đến 1891 bởi kiến trúc sư lừng danh Gustave Eiffel. Công trình mang đậm phong cách kiến trúc Phục Hưng kết hợp với các chi tiết trang trí phương Đông độc đáo. Nơi đây không chỉ giữ vai trò bưu chính quan trọng mà còn là điểm đến di sản thu hút hàng triệu du khách ghé thăm mỗi năm.</p>
+            
+            <h4 class="font-bold text-gray-800 pt-2">Vị Trí Bản Đồ:</h4>
+            <div id="map" class="map-box rounded-lg border"></div>
+            <a href="https://www.google.com/maps/search/?api=1&query=10.7797,106.6997" target="_blank" class="block text-center py-2.5 bg-red-800 text-white font-bold rounded-lg hover:bg-red-900 transition text-sm">Mở Chỉ Đường Trên Google Maps</a>
+        </div>
+    </main>
+
+    <footer class="bg-[#1A202C] text-gray-400 py-6 text-center text-xs">
+        <p>© 2026 Trang Thông Tin Di Tích Lịch Sử TP.HCM</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([10.7797, 106.6997], 16);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.marker([10.7797, 106.6997]).addTo(map).bindPopup('<b>Bưu Điện TP.HCM</b>').openPopup();
+
+        let utterance = null;
+        function speakText(text) {
+            window.speechSynthesis.cancel();
+            utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'vi-VN';
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
+        function stopSpeech() {
+            if(window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+        }
+    </script>
+</body>
+</html>
