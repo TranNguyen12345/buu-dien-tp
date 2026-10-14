@@ -7,29 +7,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        body { font-family: 'Roboto', sans-serif; }
         .map-box { height: 300px; width: 100%; }
     </style>
 </head>
-<body class="bg-[#FFFBF0] text-[#1A202C] font-sans min-h-screen flex flex-col">
+<body class="bg-[#FFFBF0] text-[#1A202C] min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-[#9B2C2C] text-white shadow-md py-4 px-6">
         <div class="max-w-4xl mx-auto flex items-center space-x-3">
             <i class="fa-solid fa-landmark text-2xl text-[#D69E2E]"></i>
-            <h1 class="font-serif text-xl font-bold">Bưu Điện Trung Tâm Thành Phố</h1>
+            <h1 class="text-xl font-bold">Bưu Điện Trung Tâm Thành Phố</h1>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-4 py-8 flex-1 space-y-6 w-full">
         <div class="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg">
-            <!-- Hình ảnh mới tải lên -->
-            <img src="buu-dien.jpg" class="w-full h-full object-cover">
+            <img src="buu-dien.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80'">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent flex items-end p-6">
                 <div>
                     <span class="px-3 py-1 bg-[#9B2C2C] text-white text-xs font-semibold rounded-full uppercase">Di tích Kiến trúc Nghệ thuật</span>
-                    <h1 class="font-serif text-2xl md:text-4xl font-bold text-white mt-2">Bưu Điện Trung Tâm TP.HCM</h1>
+                    <h1 class="text-2xl md:text-4xl font-bold text-white mt-2">Bưu Điện Trung Tâm TP.HCM</h1>
                     <p class="text-gray-200 text-sm mt-1"><i class="fa-solid fa-location-dot text-[#D69E2E] mr-2"></i>2 Công xã Paris, Phường Bến Nghé, Quận 1</p>
                 </div>
             </div>
@@ -49,7 +49,7 @@
 
         <!-- Details -->
         <div class="bg-white p-6 rounded-xl shadow-sm space-y-4">
-            <h3 class="font-serif font-bold text-xl text-[#9B2C2C] border-b pb-2">Giới Thiệu Chi Tiết</h3>
+            <h3 class="font-bold text-xl text-[#9B2C2C] border-b pb-2">Giới Thiệu Chi Tiết</h3>
             <p class="text-gray-700 leading-relaxed">Bưu điện Trung tâm TP.HCM được xây dựng từ năm 1886 đến 1891 bởi kiến trúc sư lừng danh Gustave Eiffel. Công trình mang đậm phong cách kiến trúc Phục Hưng kết hợp với các chi tiết trang trí phương Đông độc đáo. Nơi đây không chỉ giữ vai trò bưu chính quan trọng mà còn là điểm đến di sản thu hút hàng triệu du khách ghé thăm mỗi năm.</p>
             
             <h4 class="font-bold text-gray-800 pt-2">Vị Trí Bản Đồ:</h4>
@@ -68,16 +68,20 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
         L.marker([10.7797, 106.6997]).addTo(map).bindPopup('<b>Bưu Điện TP.HCM</b>').openPopup();
 
+        let synth = window.speechSynthesis;
         let utterance = null;
+
         function speakText(text) {
-            window.speechSynthesis.cancel();
+            if (!('speechSynthesis' in window)) return;
+            synth.cancel();
             utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'vi-VN';
             utterance.rate = 0.9;
-            window.speechSynthesis.speak(utterance);
+            synth.speak(utterance);
         }
+
         function stopSpeech() {
-            if(window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+            if (synth && (synth.speaking || synth.pending)) synth.cancel();
         }
     </script>
 </body>
