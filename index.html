@@ -24,6 +24,7 @@
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-4 py-8 flex-1 space-y-6 w-full">
+        <!-- Image Banner -->
         <div class="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg">
             <img src="buu-dien.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80'">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent flex items-end p-6">
@@ -39,22 +40,61 @@
         <div class="bg-[#9B2C2C] text-white p-5 rounded-xl shadow flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center space-x-3">
                 <i class="fa-solid fa-headphones text-2xl text-[#D69E2E]"></i>
-                <div><h4 class="font-bold">Thuyết Minh Audio</h4><p class="text-xs text-red-200">Nghe hướng dẫn viên ảo giới thiệu</p></div>
+                <div><h4 class="font-bold">Thuyết Minh Audio</h4><p class="text-xs text-red-200">Nghe hướng dẫn viên ảo giới thiệu kiến trúc</p></div>
             </div>
             <div class="flex space-x-2">
-                <button onclick="speakText('Bưu điện Trung tâm Thành phố Hồ Chí Minh là công trình kiến trúc tiêu biểu kết hợp giữa phong cách phương Tây và phương Đông do kiến trúc sư Gustave Eiffel thiết kế, xây dựng từ năm 1886 đến 1891.')" class="px-4 py-2 bg-[#D69E2E] text-[#1A202C] font-bold rounded-lg text-sm hover:bg-yellow-400 transition"><i class="fa-solid fa-play mr-1"></i> Phát</button>
+                <button onclick="speakText('Bưu điện Trung tâm TP.HCM do kiến trúc sư Alfred Foulhoux thiết kế, xây dựng từ năm 1886 đến 1891, đại diện cho thời kỳ hoàng kim của kiến trúc Tân cổ điển Neoclassical kết hợp kỹ thuật kết cấu sắt thép tiền chế. Sảnh chính là không gian vòm bán nguyệt khổng lồ đỡ bởi 2 hàng cột sắt uốn cong với các mối nối đinh tán rivê. Mặt tiền công trình nổi bật với các phù điêu ghi danh những nhà khoa học kiệt xuất như Morse, Ampère, Volta, Ohm và hệ cột dạng giả cột mang đầu cột kiểu Ionic cách điệu.')" class="px-4 py-2 bg-[#D69E2E] text-[#1A202C] font-bold rounded-lg text-sm hover:bg-yellow-400 transition"><i class="fa-solid fa-play mr-1"></i> Phát</button>
                 <button onclick="stopSpeech()" class="px-4 py-2 bg-white/20 rounded-lg text-sm hover:bg-white/30 transition"><i class="fa-solid fa-stop mr-1"></i> Dừng</button>
             </div>
         </div>
 
         <!-- Details -->
-        <div class="bg-white p-6 rounded-xl shadow-sm space-y-4">
+        <div class="bg-white p-6 rounded-xl shadow-sm space-y-6">
             <h3 class="font-bold text-xl text-[#9B2C2C] border-b pb-2">Giới Thiệu Chi Tiết</h3>
-            <p class="text-gray-700 leading-relaxed">Bưu điện Trung tâm TP.HCM được xây dựng từ năm 1886 đến 1891 bởi kiến trúc sư lừng danh Gustave Eiffel. Công trình mang đậm phong cách kiến trúc Phục Hưng kết hợp với các chi tiết trang trí phương Đông độc đáo. Nơi đây không chỉ giữ vai trò bưu chính quan trọng mà còn là điểm đến di sản thu hút hàng triệu du khách ghé thăm mỗi năm.</p>
             
-            <h4 class="font-bold text-gray-800 pt-2">Vị Trí Bản Đồ:</h4>
-            <div id="map" class="map-box rounded-lg border"></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=10.7797,106.6997" target="_blank" class="block text-center py-2.5 bg-red-800 text-white font-bold rounded-lg hover:bg-red-900 transition text-sm">Mở Chỉ Đường Trên Google Maps</a>
+            <p class="text-gray-700 leading-relaxed">
+                Công trình được thiết kế bởi <strong>KTS Alfred Foulhoux</strong> (xây dựng 1886–1891), đại diện cho thời kỳ hoàng kim của <strong>kiến trúc Tân cổ điển (Neoclassical)</strong> kết hợp kỹ thuật kết cấu sắt/thép tiền chế.
+            </p>
+
+            <!-- Section 1 -->
+            <div class="space-y-2">
+                <h4 class="font-bold text-gray-900 text-lg flex items-center">
+                    <i class="fa-solid fa-archway text-[#9B2C2C] mr-2"></i> Kết cấu vòm chịu lực (Vaulted Structure)
+                </h4>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2 leading-relaxed">
+                    <li><strong>Sảnh chính:</strong> Là một không gian vòm bán nguyệt khổng lồ được đỡ bởi 2 hàng cột sắt uốn cong. Hệ thống sườn thép tiền chế không chỉ đóng vai trò chịu lực cho toàn bộ phần mái mà còn tạo nên một "giếng trời" chạy dài dọc trục chính.</li>
+                    <li><strong>Các mối nối thép:</strong> Gắn bằng đinh tán rivê (tương tự công nghệ xây dựng tháp Eiffel) giúp công trình duy trì độ co giãn nhiệt ổn định qua hơn 130 năm.</li>
+                </ul>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="space-y-2">
+                <h4 class="font-bold text-gray-900 text-lg flex items-center">
+                    <i class="fa-solid fa-[#9B2C2C] fa-wind text-[#9B2C2C] mr-2"></i> Tổ chức mặt bằng & Thông gió
+                </h4>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2 leading-relaxed">
+                    <li><strong>Bố cục:</strong> Đối xứng tuyệt đối qua trục trung tâm.</li>
+                    <li><strong>Thông gió & Ánh sáng:</strong> Hệ thống cửa sổ lá sách cao kịch trần kết hợp vòm lấy sáng (clerestory windows) trên mái giúp sảnh luôn ngập tràn ánh sáng tự nhiên và luân chuyển không khí liên tục, giảm thiểu cái nóng oi nồng của Sài Gòn.</li>
+                </ul>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="space-y-2">
+                <h4 class="font-bold text-gray-900 text-lg flex items-center">
+                    <i class="fa-solid fa-gem text-[#9B2C2C] mr-2"></i> Chi tiết trang trí đắt giá
+                </h4>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2 leading-relaxed">
+                    <li><strong>Trục mặt tiền:</strong> Mảng tường giữa các ô cửa tầng 1 được đắp nổi các phù điêu hình chữ nhật ghi danh những nhà khoa học kiệt xuất đóng góp cho ngành điện từ và bưu chính (như <em>Morse, Ampère, Volta, Ohm</em>).</li>
+                    <li><strong>Hệ cột:</strong> Cột trụ phần mặt tiền được thiết kế theo dạng giả cột (pilaster) mang đầu cột kiểu Ionic cách điệu với các họa tiết chạm khắc tỉ mỉ.</li>
+                </ul>
+            </div>
+
+            <!-- Map -->
+            <div class="pt-4 border-t">
+                <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-map-location-dot text-[#9B2C2C] mr-2"></i> Vị Trí Bản Đồ:</h4>
+                <div id="map" class="map-box rounded-lg border"></div>
+                <a href="https://www.google.com/maps/search/?api=1&query=10.7797,106.6997" target="_blank" class="block text-center py-2.5 bg-red-800 text-white font-bold rounded-lg hover:bg-red-900 transition text-sm mt-3">Mở Chỉ Đường Trên Google Maps</a>
+            </div>
         </div>
     </main>
 
